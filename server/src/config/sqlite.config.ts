@@ -1,3 +1,4 @@
+import { UserEntity } from "./../user/entities/user.entity";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
@@ -6,6 +7,6 @@ export const getSqliteConfig = async (
 ): Promise<TypeOrmModuleOptions> => ({
 	type: "sqlite",
 	database: configService.get("DATABASE_NAME"),
-	entities: [],
+	entities: [UserEntity],
 	synchronize: true,
 });

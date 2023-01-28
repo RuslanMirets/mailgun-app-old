@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { getSqliteConfig } from "./config/sqlite.config";
+import { UserModule } from "./user/user.module";
 
 @Module({
 	imports: [
@@ -11,6 +12,7 @@ import { getSqliteConfig } from "./config/sqlite.config";
 			inject: [ConfigService],
 			useFactory: getSqliteConfig,
 		}),
+		UserModule,
 	],
 	controllers: [],
 	providers: [],
