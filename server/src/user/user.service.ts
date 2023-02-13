@@ -18,4 +18,12 @@ export class UserService {
 	async findAll() {
 		return this.userRepository.find();
 	}
+
+	async findOneByEmail(email: string) {
+		return this.userRepository.findOneBy({ email });
+	}
+
+	async findOneById(id: number) {
+		return this.userRepository.findOneBy({ id });
+	}
 }
