@@ -1,3 +1,5 @@
+import { useAuth } from "@/hooks/useAuth";
+import { AuthService } from "@/services/auth/auth.service";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
 	FormControl,
@@ -9,9 +11,11 @@ import {
 	InputGroup,
 	Text,
 } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ILoginFields } from "./login-form.interface";
 import styles from "./LoginForm.module.scss";
 
 const LoginForm: FC = () => {
@@ -21,21 +25,39 @@ const LoginForm: FC = () => {
 		handleSubmit,
 		register,
 		reset,
-		formState: { errors, isSubmitting },
-	} = useForm();
+		formState: { errors },
+	} = useForm<ILoginFields>({ mode: "onChange" });
 
-	const onSubmit = (data: any) => {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				alert(JSON.stringify(data, null, 2));
-				resolve();
+	const { user, setUser } = useAuth();
+
+	const {
+		mutate: loginAsync,
+		isLoading,
+		isError,
+	} = useMutation(
+		["login"],
+		(data: ILoginFields) => AuthService.login(data.email, data.password),
+		{
+			onSuccess(data) {
+				if (setUser) setUser(data.user);
 				reset();
-			}, 3000);
-		});
+			},
+		},
+	);
+
+	const onSubmit: SubmitHandler<ILoginFields> = (data) => {
+		loginAsync(data);
 	};
 
 	return (
 		<form className={styles.root} onSubmit={handleSubmit(onSubmit)}>
+			{user && (
+				<div>
+					{user.email}, {user.username}
+				</div>
+			)}
+
+			{isError && <div>Неверный логин или пароль</div>}
 			<FormControl isInvalid={errors.email}>
 				<FormLabel htmlFor="email">Email</FormLabel>
 				<Input
@@ -87,7 +109,7 @@ const LoginForm: FC = () => {
 				className={styles.submit}
 				type="submit"
 				colorScheme="teal"
-				isLoading={isSubmitting}
+				isLoading={isLoading}
 				loadingText="Вход"
 			>
 				Войти
