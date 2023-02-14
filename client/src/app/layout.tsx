@@ -2,14 +2,8 @@
 
 import "@/styles/globals.scss";
 import theme from "@/utils/theme";
-import { ChakraProvider } from "@chakra-ui/react";
-// import { Manrope } from "@next/font/google";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 import "@fontsource/manrope";
-
-// const manrope = Manrope({
-// 	weight: ["400", "500", "600", "700"],
-// 	variable: "--manrope-font",
-// });
 
 export default function RootLayout({
 	children,
@@ -18,16 +12,14 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="ru">
-			{/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
 			<head />
 			<body>
 				<ChakraProvider theme={theme}>
-					<div className="wrapper">
-						<main>{children}</main>
-					</div>
+					<Container maxW="4xl">
+						<div className="wrapper">
+							<main>{children}</main>
+						</div>
+					</Container>
 				</ChakraProvider>
 			</body>
 		</html>
