@@ -1,7 +1,15 @@
 "use client";
 
 import "@/styles/globals.scss";
+import theme from "@/utils/theme";
 import { ChakraProvider } from "@chakra-ui/react";
+// import { Manrope } from "@next/font/google";
+import "@fontsource/manrope";
+
+// const manrope = Manrope({
+// 	weight: ["400", "500", "600", "700"],
+// 	variable: "--manrope-font",
+// });
 
 export default function RootLayout({
 	children,
@@ -16,8 +24,10 @@ export default function RootLayout({
       */}
 			<head />
 			<body>
-				<ChakraProvider>
-					<main>{children}</main>
+				<ChakraProvider theme={theme}>
+					<div className="wrapper">
+						<main>{children}</main>
+					</div>
 				</ChakraProvider>
 			</body>
 		</html>
