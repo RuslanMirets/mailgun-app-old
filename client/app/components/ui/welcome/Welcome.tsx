@@ -1,9 +1,17 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
+import AuthDialog from "../auth-dialog/AuthDialog";
 import styles from "./Welcome.module.scss";
 
 const Welcome: FC = () => {
+	const [open, setOpen] = useState(false);
+	const toggleAuthDialog = () => {
+		setOpen(!open);
+	};
+	const openAuthDialog = () => {
+		toggleAuthDialog();
+	};
+
 	return (
 		<Box className={styles.root}>
 			<Container maxWidth="lg">
@@ -12,15 +20,16 @@ const Welcome: FC = () => {
 						Mailgun App
 					</Typography>
 					<Box className={styles.buttons}>
-						<Link href="/login">
-							<Button variant="contained">Войти</Button>
-						</Link>
-						<Link href="/register">
-							<Button variant="outlined">Зарегистрироваться</Button>
-						</Link>
+						<Button variant="contained" onClick={openAuthDialog}>
+							Авторизация
+						</Button>
+						{/* <Button variant="outlined" onClick={openAuthDialog}>
+							Зарегистрироваться
+						</Button> */}
 					</Box>
 				</Box>
 			</Container>
+			<AuthDialog open={open} onClose={toggleAuthDialog} />
 		</Box>
 	);
 };
