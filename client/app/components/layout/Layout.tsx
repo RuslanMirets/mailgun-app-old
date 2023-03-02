@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { FC, PropsWithChildren } from "react";
+import { Alert } from "../ui/alert/Alert";
 
 interface ILayout {
 	title: string;
@@ -25,6 +26,7 @@ const Layout: FC<PropsWithChildren<ILayout>> = ({
 			</Head>
 
 			<div className="wrapper">
+				<Alert />
 				<main>{children}</main>
 			</div>
 		</>

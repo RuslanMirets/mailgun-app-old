@@ -1,3 +1,5 @@
+import { register } from "@/store/actions/user";
+import { useAppDispatch } from "@/store/hooks";
 import { RegisterFormSchema } from "@/utils/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@mui/material";
@@ -6,13 +8,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FormField } from "../../form-field/FormField";
 
 const RegisterForm: FC = () => {
+	const dispatch = useAppDispatch();
+
 	const methods = useForm({
 		mode: "onChange",
 		resolver: yupResolver(RegisterFormSchema),
 	});
 
 	const onSubmit = async (data: any) => {
-		console.log(data);
+		dispatch(register(data));
 	};
 
 	return (
