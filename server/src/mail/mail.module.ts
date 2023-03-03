@@ -9,12 +9,6 @@ import { MailController } from "./mail.controller";
 	imports: [
 		ConfigModule.forRoot(),
 		MailgunModule.forAsyncRoot({
-			// useFactory: async () => {
-			// 	return {
-			// 		username: "api",
-			// 		key: "b011aba31eee0e3a5b10b6f4867912cf-d1a07e51-76d5f60c",
-			// 	};
-			// },
 			imports: [ConfigModule],
 			inject: [ConfigService],
 			useFactory: getMailgunConfig,
