@@ -5,10 +5,11 @@ import { useFormContext } from "react-hook-form";
 interface IFormField {
 	name: string;
 	label: string;
-	type: string;
+	type?: string;
 	disabled?: boolean;
 	multiline?: boolean;
-	maxRows?: any;
+	maxRows?: number;
+	rows?: number;
 }
 
 export const FormField: React.FC<IFormField> = ({
@@ -18,6 +19,7 @@ export const FormField: React.FC<IFormField> = ({
 	disabled,
 	multiline,
 	maxRows,
+	rows,
 }) => {
 	const { register, formState } = useFormContext();
 
@@ -33,6 +35,7 @@ export const FormField: React.FC<IFormField> = ({
 			disabled={disabled}
 			multiline={multiline}
 			maxRows={maxRows}
+			rows={rows}
 		/>
 	);
 };

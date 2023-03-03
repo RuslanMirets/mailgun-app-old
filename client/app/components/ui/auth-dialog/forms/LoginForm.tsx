@@ -22,7 +22,7 @@ const LoginForm: FC = () => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={methods.handleSubmit(onSubmit)}>
-				<FormField type="text" label="Email" name="email" />
+				<FormField type="email" label="Email" name="email" />
 				<FormField type="password" label="Пароль" name="password" />
 				<Button
 					disabled={

@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { FC, PropsWithChildren } from "react";
 import { Alert } from "../ui/alert/Alert";
+import Header from "../ui/header/Header";
 
 interface ILayout {
 	title: string;
@@ -14,6 +16,8 @@ const Layout: FC<PropsWithChildren<ILayout>> = ({
 	description,
 	keywords,
 }) => {
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
@@ -26,6 +30,7 @@ const Layout: FC<PropsWithChildren<ILayout>> = ({
 			</Head>
 
 			<div className="wrapper">
+				{router.pathname !== "/" && <Header />}
 				<Alert />
 				<main>{children}</main>
 			</div>

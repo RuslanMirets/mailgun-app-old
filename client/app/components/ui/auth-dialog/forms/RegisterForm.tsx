@@ -25,7 +25,7 @@ const RegisterForm: FC = () => {
 				<FormField type="text" label="Имя" name="firstName" />
 				<FormField type="text" label="Фамилия" name="lastName" />
 				<FormField type="text" label="Username" name="username" />
-				<FormField type="text" label="Email" name="email" />
+				<FormField type="email" label="Email" name="email" />
 				<FormField type="password" label="Пароль" name="password" />
 				<Button
 					disabled={
