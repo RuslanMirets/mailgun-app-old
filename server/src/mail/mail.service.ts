@@ -1,10 +1,5 @@
 import { ConfigService } from "@nestjs/config";
-import {
-	ForbiddenException,
-	HttpException,
-	HttpStatus,
-	Injectable,
-} from "@nestjs/common";
+import { ForbiddenException, Injectable } from "@nestjs/common";
 import { MailgunService } from "nestjs-mailgun";
 import { CreateMailDto } from "./dto/create-mail.dto";
 
