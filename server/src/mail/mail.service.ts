@@ -1,5 +1,10 @@
 import { ConfigService } from "@nestjs/config";
-import { Injectable } from "@nestjs/common";
+import {
+	ForbiddenException,
+	HttpException,
+	HttpStatus,
+	Injectable,
+} from "@nestjs/common";
 import { MailgunService } from "nestjs-mailgun";
 import { CreateMailDto } from "./dto/create-mail.dto";
 
@@ -20,6 +25,10 @@ export class MailService {
 			html: `<p>${dto.message}</p>`,
 		};
 
-		return await this.mailgunService.createEmail(domain, data);
+		return await this.mailgunService
+			.createEmail(domain, data)
+			.catch((error) => {
+				throw new ForbiddenException(error);
+			});
 	}
 }
